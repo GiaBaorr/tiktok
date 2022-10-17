@@ -6,17 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
-    faMagnifyingGlass,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloudUpload,
     faCoins,
     faGear,
     faSignOut,
-    // faMessage,
 } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 //Tippy
 import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
@@ -30,7 +28,9 @@ import { Wrapper as PoppersWrapper } from '~/Components/Poppers';
 import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
 import Menu from '~/Components/Poppers/Menu';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+import Image from '~/Components/Image';
+// Icons
+import { UploadIcon, SearchIcon, InboxIcon, MessageIcon } from '~/Components/Icons';
 // END IMPORT
 const imgUrl =
     'https://scontent.xx.fbcdn.net/v/t39.30808-1/311114567_111104371772728_6210893300346458364_n.jpg?stp=c0.0.100.100a_dst-jpg_p100x100&_nc_cat=109&ccb=1-7&_nc_sid=dbb9e7&_nc_ohc=CDdXxg1K2zIAX-M3_BL&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=00_AT9W3D_su69NglhnfBNVb6mYd1b-NBSndKD7dladGOs4Rw&oe=634DA4C2';
@@ -137,7 +137,7 @@ function Header() {
                         </button>
                         <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTippy>
@@ -145,9 +145,34 @@ function Header() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 300]} content="Upload video" placement="bottom">
+                            <Tippy
+                                delay={[200, 200]}
+                                content="Upload video"
+                                placement="bottom"
+                                animation="shift-away"
+                            >
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy
+                                delay={[200, 200]}
+                                content="Messages"
+                                placement="bottom"
+                                animation="shift-away"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy
+                                delay={[200, 200]}
+                                content="Inbox"
+                                placement="bottom"
+                                animation="shift-away"
+                            >
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
                                 </button>
                             </Tippy>
                         </>
@@ -160,7 +185,7 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img src={imgUrl} className={cx('user-avatar')} alt="user name" />
+                            <Image src={imgUrl} className={cx('user-avatar')} alt="user name" />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
