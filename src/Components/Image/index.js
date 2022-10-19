@@ -14,6 +14,7 @@ function Image({ src, className, ...props }, ref) {
             ref={ref}
             src={fallback || src}
             {...props}
+            alt={props.alt}
             onError={handleOnError}
         />
     );

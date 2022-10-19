@@ -1,18 +1,20 @@
-// classnames
+// library
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
-// Hooks
-import { useState, useEffect, useRef } from 'react';
-// basic
+// import axios from 'axios';
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 import AccountItem from '~/Components/AccountItem';
+// Component
+import { Wrapper as PoppersWrapper } from '~/Components/Poppers';
+// Hooks & tools
+import { useState, useEffect, useRef } from 'react';
+import { useDebounced } from '~/Hooks';
+import * as searchService from '~/apiService/searchService';
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SearchIcon } from '~/Components/Icons';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
-// Component
-import { Wrapper as PoppersWrapper } from '~/Components/Poppers';
 
 const cx = classNames.bind(styles);
 
@@ -22,26 +24,24 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResults, setShowResults] = useState(true);
     const [loading, setLoading] = useState(false);
+
+    const debouncedValue = useDebounced(searchValue, 650);
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
-        setLoading(true);
-        fetch(
-            `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-                searchValue,
-            )}&type=less`,
-        )
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
-    }, [searchValue]);
+        // API call
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const result = await searchService.search(debouncedValue);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+        fetchApi();
+    }, [debouncedValue]);
     // ref and variable
     const inputRef = useRef();
     // handle function
