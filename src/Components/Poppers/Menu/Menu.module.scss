@@ -21,11 +21,26 @@
 .menu-poppers {
     padding-bottom: 8px;
 }
-
+.menu-body {
+    overflow-y: auto;
+}
+// .menu-body::-webkit-scrollbar {
+//     border-radius: 0;
+//     width: 8px;
+// }
+// .menu-body::-webkit-scrollbar-thumb {
+//     border-radius: 4px;
+//     background-color: rgba(22, 24, 35, 0.06);
+// }
+// .menu-body::-webkit-scrollbar-track {
+//     border-radius: 0;
+//     background-color: rgba(0, 0, 0, 0);
+// }
 .header {
     position: relative;
     height: 50px;
     margin-top: -8px;
+    flex-shrink: 0;
 }
 .back-btn {
     width: 50px;

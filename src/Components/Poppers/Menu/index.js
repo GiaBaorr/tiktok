@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 // empty function
 const defaultFn = () => {};
 //MENU
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], onChange = defaultFn, hideOnClick = true, ...props }) {
     // handle multiple levels menu
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
@@ -42,11 +42,13 @@ function Menu({ children, items = [], onChange = defaultFn }) {
 
     return (
         <Tippy
+            {...props}
             // visible
             interactive
             offset={[12, 8]}
             delay={[0, 500]}
             placement="bottom-end"
+            hideOnClick={hideOnClick}
             render={(attrs) => (
                 <div className={cx('content')} tabIndex="-1" {...attrs}>
                     <PoppersWrapper className={cx('menu-poppers')}>
@@ -59,7 +61,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
                                 }}
                             />
                         )}
-                        {renderItems()}
+                        <div className={cx('menu-body')}>{renderItems()}</div>
                     </PoppersWrapper>
                 </div>
             )}

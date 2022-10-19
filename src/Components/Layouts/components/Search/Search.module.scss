@@ -19,6 +19,8 @@
         outline: none;
         background-color: transparent;
         caret-color: var(--primary);
+        font-family: var(--font-family);
+        line-height: 22px;
     }
     &:focus-within {
         border: 1.5px solid #c5c5c9;

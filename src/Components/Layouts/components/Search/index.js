@@ -46,7 +46,10 @@ function Search() {
     const inputRef = useRef();
     // handle function
     const handleOnChange = (e) => {
-        setSearchValue(e.target.value);
+        let searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
     };
     const handleClear = () => {
         setSearchValue('');
@@ -55,10 +58,16 @@ function Search() {
     const handleHideResults = () => {
         setShowResults(false);
     };
+    const handleSubmitOnmouseDown = (e) => {
+        e.preventDefault();
+    };
+    const handleSubmit = () => {};
     return (
-        <>
+        // div wrapper to fix Tippy error
+        <div>
             <HeadlessTippy
                 visible={showResults && searchResult.length > 0}
+                // appendTo={() => document.body}
                 interactive
                 onClickOutside={handleHideResults}
                 render={(attrs) => (
@@ -89,12 +98,16 @@ function Search() {
                         </>
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                    <button className={cx('search-btn')}>
+                    <button
+                        className={cx('search-btn')}
+                        onMouseDown={handleSubmitOnmouseDown}
+                        onClick={handleSubmit}
+                    >
                         <SearchIcon />
                     </button>
                 </div>
             </HeadlessTippy>
-        </>
+        </div>
     );
 }
 

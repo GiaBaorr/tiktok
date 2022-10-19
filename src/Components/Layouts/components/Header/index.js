@@ -1,6 +1,10 @@
 // tools
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
+import { Link } from 'react-router-dom';
+//Tippy
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,10 +17,9 @@ import {
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-//Tippy
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+
 // Material
+import routesConfig from '~/config/routes';
 import images from '~/assets/images';
 // React Hooks
 // import { useEffect, useState } from 'react';
@@ -102,7 +105,10 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* TIKTOK LOGO */}
-                <img src={images.logo} alt="TikTok" />
+                <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <img src={images.logo} alt="TikTok" />
+                </Link>
+
                 {/* SEARCH BAR */}
                 <Search />
                 {/* Actions - User section */}
@@ -147,7 +153,11 @@ function Header() {
                             {/* faEllipsisVertical */}
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <Menu
+                        items={currentUser ? userMenu : MENU_ITEMS}
+                        onChange={handleMenuChange}
+                        hideOnClick={false}
+                    >
                         {currentUser ? (
                             <Image src={imgUrl} className={cx('user-avatar')} alt="user name" />
                         ) : (
