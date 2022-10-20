@@ -19,7 +19,7 @@ import {
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 // Material
-import routesConfig from '~/config/routes';
+import config from '~/config';
 import images from '~/assets/images';
 // React Hooks
 // import { useEffect, useState } from 'react';
@@ -27,7 +27,7 @@ import images from '~/assets/images';
 import Button from '~/Components/Button';
 import Menu from '~/Components/Poppers/Menu';
 import Image from '~/Components/Image';
-import Search from '~/Components/Layouts/components/Search';
+import Search from '~/layouts/components/Search';
 // Icons
 import { UploadIcon, InboxIcon, MessageIcon } from '~/Components/Icons';
 // END IMPORT
@@ -105,7 +105,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* TIKTOK LOGO */}
-                <Link to={routesConfig.home} className={cx('logo-link')}>
+                <Link to={config.routes.home} className={cx('logo-link')}>
                     <img src={images.logo} alt="TikTok" />
                 </Link>
 

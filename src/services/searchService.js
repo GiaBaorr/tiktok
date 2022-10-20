@@ -1,10 +1,10 @@
-import * as request from '~/utils/request';
+import * as httpRequest from '~/utils/httpRequest';
 
 // API call
 export const search = async (q, type = 'less') => {
     try {
         // dùng axios.create để cấu hình baseURL cho file request.js => dùng request.get() không cần truyền full url
-        const res = await request.get('users/search', {
+        const res = await httpRequest.get('users/search', {
             params: {
                 q: q,
                 type: type,

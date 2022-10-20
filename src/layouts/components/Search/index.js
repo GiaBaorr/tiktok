@@ -10,7 +10,7 @@ import { Wrapper as PoppersWrapper } from '~/Components/Poppers';
 // Hooks & tools
 import { useState, useEffect, useRef } from 'react';
 import { useDebounced } from '~/Hooks';
-import * as searchService from '~/apiService/searchService';
+import * as searchService from '~/services/searchService';
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SearchIcon } from '~/Components/Icons';

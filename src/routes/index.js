@@ -1,5 +1,5 @@
 //layout
-import { HeaderOnly } from '~/Components/Layouts';
+import { HeaderOnly } from '~/layouts';
 
 //pages
 import Home from '~/pages/Home';
@@ -8,14 +8,14 @@ import Upload from '~/pages/Upload';
 import Search from '~/pages/Search';
 import Profile from '~/pages/Profile';
 //
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 const publicRoutes = [
-    { path: routesConfig.home, component: Home },
-    { path: routesConfig.following, component: Following },
-    { path: routesConfig.upload, component: Upload, layout: HeaderOnly },
-    { path: routesConfig.nickname, component: Profile },
-    { path: routesConfig.search, component: Search, layout: null },
+    { path: config.routes.home, component: Home },
+    { path: config.routes.following, component: Following },
+    { path: config.routes.upload, component: Upload, layout: HeaderOnly },
+    { path: config.routes.nickname, component: Profile },
+    { path: config.routes.search, component: Search, layout: null },
 ];
 
 // already login

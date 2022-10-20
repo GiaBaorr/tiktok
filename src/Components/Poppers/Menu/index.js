@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 // Menu
 import classNames from 'classnames/bind';
 import styles from './Menu.module.scss';
@@ -54,7 +55,7 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = true, 
                     <PoppersWrapper className={cx('menu-poppers')}>
                         {history.length > 1 && (
                             <Header
-                                title="Language"
+                                title={current.title}
                                 // handle multiple levels menu
                                 onBack={() => {
                                     setHistory((prev) => prev.slice(0, prev.length - 1));
@@ -74,4 +75,10 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = true, 
     );
 }
 
+Menu.propTypes = {
+    children: PropTypes.node.isRequired,
+    items: PropTypes.array,
+    onChange: PropTypes.func,
+    hideOnClick: PropTypes.bool,
+};
 export default Menu;
