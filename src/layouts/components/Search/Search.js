@@ -4,7 +4,7 @@ import styles from './Search.module.scss';
 // import axios from 'axios';
 import HeadlessTippy from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
-import AccountItem from '~/Components/AccountItem';
+import AccountItem from '~/Components/AccountItem/AccountItem';
 // Component
 import { Wrapper as PoppersWrapper } from '~/Components/Poppers';
 // Hooks & tools
@@ -13,7 +13,7 @@ import { useDebounced } from '~/Hooks';
 import * as searchService from '~/services/searchService';
 // icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { SearchIcon } from '~/Components/Icons';
+import { SearchIcon } from '~/Components/Icons/Icons';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
@@ -22,7 +22,7 @@ function Search() {
     // state
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResults, setShowResults] = useState(true);
+    const [showResults, setShowResults] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const debouncedValue = useDebounced(searchValue, 650);

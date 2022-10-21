@@ -40,35 +40,50 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = true, 
             );
         });
     };
+    const renderResult = (attrs) => (
+        <div className={cx('content')} tabIndex="-1" {...attrs}>
+            <PoppersWrapper className={cx('menu-poppers')}>
+                {history.length > 1 && (
+                    <Header
+                        title={current.title}
+                        // handle multiple levels menu
+                        onBack={() => {
+                            setHistory((prev) => prev.slice(0, prev.length - 1));
+                        }}
+                    />
+                )}
+                <div className={cx('menu-body')}>{renderItems()}</div>
+            </PoppersWrapper>
+        </div>
+    );
+    const handleResetFirstPage = () => {
+        setHistory((prev) => prev.slice(0, 1));
+    };
+    // Tippy headless animation
+    const onShow = (instance) => {
+        instance.popper.style.opacity = 1;
+    };
+    const onHide = (instance) => {
+        instance.popper.style.transitionDuration = '0.5s';
+        instance.popper.style.transitionProperty = 'opacity';
+        instance.popper.style.opacity = 0;
+
+        setTimeout(handleResetFirstPage, 501);
+    };
 
     return (
         <Tippy
-            {...props}
             // visible
             interactive
-            offset={[12, 8]}
             delay={[0, 500]}
+            animation={true}
+            offset={[12, 8]}
             placement="bottom-end"
             hideOnClick={hideOnClick}
-            render={(attrs) => (
-                <div className={cx('content')} tabIndex="-1" {...attrs}>
-                    <PoppersWrapper className={cx('menu-poppers')}>
-                        {history.length > 1 && (
-                            <Header
-                                title={current.title}
-                                // handle multiple levels menu
-                                onBack={() => {
-                                    setHistory((prev) => prev.slice(0, prev.length - 1));
-                                }}
-                            />
-                        )}
-                        <div className={cx('menu-body')}>{renderItems()}</div>
-                    </PoppersWrapper>
-                </div>
-            )}
-            onHide={() => {
-                setHistory((prev) => prev.slice(0, 1));
-            }}
+            render={renderResult}
+            onShow={onShow}
+            onHide={onHide}
+            {...props}
         >
             {children}
         </Tippy>

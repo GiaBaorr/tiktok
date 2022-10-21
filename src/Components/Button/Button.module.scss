@@ -36,7 +36,7 @@
 }
 .primary {
     background-color: var(--primary);
-    color: var(--white);
+    color: var(--white) !important;
     border-color: var(--primary);
     cursor: pointer;
 
@@ -47,7 +47,7 @@
 }
 .outline {
     border-color: var(--primary);
-    color: var(--primary);
+    color: var(--primary) !important ;
 
     &:hover {
         border-color: currentColor;
